@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-5" style={{ borderTop: '0.2px solid #FFF' }}>
+    <footer className="footer-full text-white py-5" style={{ borderTop: '0.2px solid #FFF' }}>
       <div className="container">
         <div className="row align-items-center">
 
@@ -58,7 +58,7 @@ export default function Footer() {
             </p>
 
             <div>
-              <a href="#" className="footer-text-links">
+              <a href="#" className="footer-text-links me-4">
                 Privacy Policy              </a>
               <a href="#" className="footer-text-links">
                 FAQ              </a>

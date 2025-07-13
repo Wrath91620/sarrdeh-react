@@ -1,3 +1,6 @@
+.container { 
+    max-width: 1250px;
+}
 g.home-subtext {
     color: var(--sarrdeh-white, #FFF);
     font-family: var(--Typfce-family-display, LBC);
@@ -275,13 +278,16 @@ g.home-subtext {
 
 .read-more-btn {
     width: 180px;
-    padding: 16px 16px;
+    padding: 10px 10px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
     justify-self: center;
     background-color: #FFF;
     text-align: center;
+    color: #076662;
+
+
 }
 
 .read-more-btn span {
@@ -290,7 +296,7 @@ g.home-subtext {
 
 .read-more-btn:hover { 
     box-shadow: inset 0 0 0 100px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: #076662;
     opacity: 1;
     outline: none;
 }
@@ -614,13 +620,26 @@ g.home-subtext {
     z-index: -1;
 }
 
-.hero {
-    background-color: #000;
-    color: #fff;
-    position: relative;
+/* page-wrapper
+ stretches full viewport but has no bg */
+.page-wrapper
+ {
+  background: #000; /* page background (or whatever) */
+  padding: 0;       /* optional vertical padding if you need */
+}
 
-
-
+/* hero-inner is your centered 1250px area with dark bg */
+.hero-inner {
+  max-width: 1290px;
+  width: 100%;            /* shrinks on mobile */
+  margin: 0 auto;         /* centers in viewport */
+  background-color: #000; /* or your dark gradient/etc */
+  color: #fff;            /* ensure text stays visible */
+  box-sizing: border-box; /* include padding in width if you add padding */
+  padding: 0;             /* add if you want inner spacing */
+   display: flex;
+  flex-direction: column;
+  gap: 2rem;   /* or whatever you need */
 }
 
 .right-column-special {
@@ -2137,6 +2156,13 @@ g.home-subtext {
     transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.values-sec-right,
+.values-sec-left {
+  position: relative;      /* <- makes ::before/::after position inside this box */
+  padding: 3rem 0;         /* ensure the section has height to work with */
+}
+
+
 .values-sec-right::before {
     content: "";
     position: absolute;
@@ -2146,6 +2172,7 @@ g.home-subtext {
     height: 136px;
     background: #57B6B2;
     filter: blur(100px);
+    z-index: 2;
 }
 
 .values-sec-left::after {
@@ -2157,6 +2184,7 @@ g.home-subtext {
     height: 136px;
     background: #57B6B2;
     filter: blur(100px);
+    z-index: 2;
 }
 
 .values-sec-left-project::after {
@@ -3321,7 +3349,10 @@ section {
 
 .slider-home {
   width: 100%;
+  border: solid 1px #fff; 
+  padding: 20px;
   overflow: hidden;
+  background-color: #031515;
 }
 
 .slide-track {
@@ -3339,6 +3370,12 @@ section {
 .slide img {
   max-height: 64px;
   max-width: 75px;
+      transition: transform 0.3s ease-in-out;
+
+}
+
+.slide img:hover { 
+    transform: scale(1.3);
 }
 
 @keyframes scroll {
@@ -3518,4 +3555,123 @@ section {
   .marker::after {
     animation: none;
   }
+}
+
+#partners {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background: #000; /* same as bg-dark or whatever you prefer */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+/* in your global CSS (e.g. App.css or Footer.css) */
+.footer-full {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background: #000; /* same as bg-black */
+  color: #fff;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  box-sizing: border-box;
+}
+
+.cta-section {
+  background: #031515; /* or your gradient */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  color: #fff;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  box-sizing: border-box;
+margin-bottom: 50px;
+}
+
+.cta-image {
+  background: url('assets/fonts/images/consultation-bg.webp') center/contain no-repeat;
+  /* contain so it doesn’t crop too heavily */
+  height: 400px;              /* fixed height for consistency */
+  width: 80%;                 /* smaller than its column */
+  max-width: 350px;           /* cap it */
+  margin: 0 auto;             /* center horizontally in its col */
+  position: relative;
+  z-index: 1;
+  bottom: -50px;
+}
+
+/* Two “spotlights” via pseudo-elements on the section itself */
+.cta-section::before,
+.cta-section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+/* Light from the head (left) */
+.cta-section::before {
+  width: 900px;
+  height: 300px;
+  top: 41%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center,
+    rgba(87,178,182,0.6) 0%,
+    rgba(87,178,182,0.0) 70%
+  );
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* Light from the right */
+.cta-section::after {
+  width: 1000px;
+  height: 800px;
+  top: 50%;
+  right: 0%;
+  transform: translate(50%, -50%);
+  background: radial-gradient(circle at center,
+    rgba(87,178,182,0.6) 0%,
+    rgba(87,178,182,0.0) 70%
+  );
+  filter: blur(80px);
+  z-index: 0;
+}
+
+
+.cta-content {
+position: relative;
+z-index: 1;
+}
+
+.cta-title {
+  font-family: LBC, sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.text-teal {
+  color: #57b6b2;
+}
+
+.cta-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* re-use your existing banner-btn styles */
+.banner-btn {
+  text-decoration: none;
 }

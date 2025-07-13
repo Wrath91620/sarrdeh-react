@@ -8,7 +8,7 @@ import ReadMoreBtn from '../components/ReadMoreBtn';
 import Journey from '../components/Journey';
 import LogoSlider from '../components/LogoSlider';
 import WorldMap from '../components/WorldMap';
-console.log('Worldnap is - ', WorldMap);
+import CTA from '../components/CTA';
 
 export default function Homepage() {
   // 1) Declare your stats array inside the function
@@ -247,122 +247,131 @@ export default function Homepage() {
 
   // 2) Return your JSX, mapping over stats
   return (
-    <div className="hero" id='hero'>
-      <Navbar />
-      <section className=" services-section paddin-section">
-        <div id="particles-container"><canvas width={752} height={442}></canvas></div>
-        <div className="container text-center position-relative">
-          <h1 className="banner-font">
-            Nowhere Else but <span style={{ color: '#57b6b2' }}>Success</span>
-          </h1>
-          <p className="home-banner-subtext">
-            Start today and let our <span style={{ color: '#57b6b2' }}>team </span>
-            handle the rest.        </p>
-          <a href="/contact-us" className="banner-btn banner-btn-text" style={{ textDecoration: 'none' }}>
-            Book Your Free Consultation
-          </a>
-        </div>
+    <div className="page-wrapper">
+      <div className="hero-inner">
+        <Navbar />
 
-      </section>
-
-      <section className="py-5" id='bubble'>
-        <div className="container">
-          <div className="row gy-4 justify-content-center">
-            {stats.map((stat, idx) => (
-              // 3) Pass the dynamic props into Bubble
-              <Bubble
-                key={idx}
-                count={stat.count}
-                label={stat.label}
-              />
-            ))}
+        <section className="services-section paddin-section">
+          <div id="particles-container">
+            <canvas width={752} height={442} />
           </div>
-        </div>
-      </section>
-      <section className="section-content relative py-5 values-sec-right values-sec-left " id='sarrdeh in short'>
-        {/* Header */}
-        <div className="row row-collapse align-equal align-center mb-4">
-          <div className="col small-12 large-12">
-            <div className="col-inner text-center">
-              <h2 className="section-names">
-                <span style={{ color: '#57b6b2' }}>Sarrdeh</span> In Short
-              </h2>
+          <div className="container text-center position-relative">
+            <h1 className="banner-font">
+              Nowhere Else but <span style={{ color: '#57b6b2' }}>Success</span>
+            </h1>
+            <p className="home-banner-subtext">
+              Start today and let our <span style={{ color: '#57b6b2' }}>team</span> handle the rest.
+            </p>
+            <a
+              href="/contact-us"
+              className="banner-btn banner-btn-text"
+              style={{ textDecoration: 'none' }}
+            >
+              Book Your Free Consultation
+            </a>
+          </div>
+        </section>
+
+        <section className="py-5" id="bubble">
+          <div className="container">
+            <div className="row gy-4 justify-content-center">
+              {stats.map((stat, idx) => (
+                <Bubble key={idx} count={stat.count} label={stat.label} />
+              ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Content */}
-        <div className="row row-collapse align-middle">
-
-          {/* Image Column */}
-          <div className="col img-col medium-6 small-12 large-6">
-            <div className="col-inner text-center img-logo">
-              <img
-                src="images/logo.png"
-                alt="SarrdehTech Logo"
-                width={165}
-                height={292}
-                className="img-fluid"
-              />
-            </div>
-          </div>
-          {/* Text Column */}
-          <div className="col text-col medium-6 small-12 large-6 p-5">
-            <div className="col-inner">
-              <p className="banner-par mb-3" style={{ padding: 0 }}>
-                We are a dedicated <span className='sarrdehTech-par'>team</span> of strategic thinkers, innovative developers,
-                and professional designers. We believe that every purpose-driven brand
-                has a unique story and remarkable ideas that deserve to be told in detail.
-              </p>
-              <p className="banner-par" style={{ padding: 0 }}>
-                Our mission is to empower your business in a fiercely competitive market
-                through advanced marketing strategies, top-tier development expertise,
-                and compelling design. Together, we’ll bring our <span className="sarrdehTech-par">vision</span> to life,
-                creating meaningful impact and achieving the results you aspire to.
-              </p>
+        <section
+          id="sarrdeh-in-short"
+          className="section-content relative py-5 values-sec-right values-sec-left"
+        >
+          <div className="row row-collapse align-equal align-center">
+            <div className="col small-12 large-12">
+              <div className="col-inner text-center">
+                <h2 className="section-names">
+                  <span style={{ color: '#57b6b2' }}>Sarrdeh</span> In Short
+                </h2>
+              </div>
             </div>
           </div>
 
-
-        </div>
-      </section>
-      <section id='service cards' className="py-5 values-sec-right values-sec-left ">
-        <div className="container">
-            <Services cards={serviceCards} />
-                      <div className="row g-3 justify-content-center align-items-stretch m-5">
-
-            <ReadMoreBtn href="/services" />
+          <div className="row row-collapse align-middle">
+            <div className="col img-col medium-6 small-12 large-6">
+              <div className="col-inner text-center img-logo">
+                <img
+                  src="images/logo.png"
+                  alt="SarrdehTech Logo"
+                  width={165}
+                  height={292}
+                  className="img-fluid"
+                />
+              </div>
+            </div>
+            <div className="col text-col medium-6 small-12 large-6 p-5">
+              <div className="col-inner">
+                <p className="banner-par mb-3" style={{ padding: 0 }}>
+                  We are a dedicated <span className="sarrdehTech-par">team</span> of strategic
+                  thinkers, innovative developers, and professional designers. We believe that every
+                  purpose-driven brand has a unique story and remarkable ideas that deserve to be told
+                  in detail.
+                </p>
+                <p className="banner-par" style={{ padding: 0 }}>
+                  Our mission is to empower your business in a fiercely competitive market through
+                  advanced marketing strategies, top-tier development expertise, and compelling
+                  design. Together, we’ll bring our <span className="sarrdehTech-par">vision</span>{' '}
+                  to life, creating meaningful impact and achieving the results you aspire to.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-      <section
-        id="journey"
-        className="py-5 journey-row values-sec-right"
-      >
-        <div className='row justify-content-center align-content-center team-title m-5 '>Your Journey With Us</div>
-        <Journey steps={steps} />
-      </section>
-      <section id='partners' className='py-5'>
-        <div className='row justify-content-center align-content-center team-title m-5 '>Partners In Success</div>
-        <LogoSlider
-          logos={logos}
-          slideWidth={150}     // px per logo
-          scrollSpeed={80}     // px per second (tweak for desired speed)
-        />
-      </section>
-      <section id='sarrdeh Global' className='py-5'>
-        <div className="team-title text-center my-5">
-          <h2 className="m-3">
-            <span style={{ color: '#57B6B2' }}>Sarrdeh</span>{' '}
-            Global
-          </h2>
-          <p className='services-text text-center'>From Syria to around the world... Our clients on every continent, and our print grows everyday.</p>
-        </div>
-        <WorldMap markers={markers} />
-      </section>
+        </section>
 
+        <section id="service-cards" className="py-5 values-sec-right values-sec-left">
+          <div className="container">
+            <div className="row g-3 justify-content-center align-items-stretch">
+              <Services cards={serviceCards} />
+            </div>
 
-      <Footer />
+            {/* ↓ this row only centers, col-auto prevents full-width ↓ */}
+            <div className="row justify-content-center mt-5">
+              <div className="col-auto">
+                <ReadMoreBtn href="/services">Read More</ReadMoreBtn>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="journey" className="py-5 journey-row values-sec-right">
+          <div className="row justify-content-center align-content-center team-title mb-5">
+            Your Journey With Us
+          </div>
+          <Journey steps={steps} />
+        </section>
+
+        <section id="partners" className="py-5">
+          <div className="row justify-content-center align-content-center team-title m-5">
+            Partners In Success
+          </div>
+          <LogoSlider logos={logos} slideWidth={150} scrollSpeed={80} />
+        </section>
+
+        <section id="sarrdeh-global" className="py-5">
+          <div className="team-title text-center my-5">
+            <h2 className="m-3">
+              <span style={{ color: '#57b6b2' }}>Sarrdeh</span> Global
+            </h2>
+            <p className="services-text text-center">
+              From Syria to around the world... Our clients on every continent, and our print grows
+              every day.
+            </p>
+          </div>
+          <WorldMap markers={markers} />
+        </section>
+        <CTA/>
+        
+        <Footer />
+      </div>
     </div>
   );
+
 }
