@@ -718,9 +718,9 @@ g.home-subtext {
     margin-bottom: 0;
 }
 
-/* .column-background {
-    background: url("/wp-content/uploads/2025/05/Frame-489.png") center no-repeat;
-} */
+.column-background {
+    background: url("/public/images/grid-services.png") center no-repeat;
+}
 
 .cards-wrapper {
     position: relative;
@@ -740,7 +740,6 @@ g.home-subtext {
     z-index: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .paddin-section {
@@ -3674,4 +3673,102 @@ z-index: 1;
 /* re-use your existing banner-btn styles */
 .banner-btn {
   text-decoration: none;
+}
+
+
+
+.hero-diamonds {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 2rem;
+}
+
+.hero-diamonds .diamond {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform‑origin at the very center of each diamond */
+  transform-origin: center center;
+  /* apply the spin animation shorthand */
+  animation: spin-cw 12s linear infinite; /* name, duration, easing, repeat :contentReference[oaicite:0]{index=0} */
+}
+
+.hero-diamonds .diamond1 { /* fastest, CW */
+  animation-duration: 10s;
+}
+
+.hero-diamonds .diamond2 { /* CCW */
+  animation-name: spin-ccw;
+  animation-duration: 14s;
+}
+
+.hero-diamonds .diamond3 { /* slowest, CW */
+  animation-duration: 18s;
+}
+
+/* define clockwise rotation */
+@keyframes spin-cw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* define counter‑clockwise rotation :contentReference[oaicite:1]{index=1} */
+@keyframes spin-ccw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+.hero-diamonds {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 2rem;
+    background: url("/public/images/grid-services.png") center no-repeat;
+}
+
+.hero-diamonds .diamond {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform‑origin at the very center of each diamond */
+  transform-origin: center center;
+  /* apply the spin animation shorthand */
+  animation: spin-cw 12s linear infinite; /* name, duration, easing, repeat :contentReference[oaicite:0]{index=0} */
+}
+
+.hero-diamonds .diamond1 { /* fastest, CW */
+  animation-duration: 10s;
+}
+
+.hero-diamonds .diamond2 { /* CCW */
+  animation-name: spin-ccw;
+  animation-duration: 14s;
+}
+
+.hero-diamonds .diamond3 { /* slowest, CW */
+  animation-duration: 18s;
+}
+
+/* define clockwise rotation */
+@keyframes spin-cw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* define counter‑clockwise rotation :contentReference[oaicite:1]{index=1} */
+@keyframes spin-ccw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+
+.cards-wrapper {
+  position: relative;
+  width: 100%;
+  height: 300px;       /* enough room for your bottom diamond */
+  overflow: visible;
+}
+
+.cards-wrapper .img { 
+width: 160px !important; 
 }

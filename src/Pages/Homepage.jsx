@@ -9,6 +9,7 @@ import Journey from '../components/Journey';
 import LogoSlider from '../components/LogoSlider';
 import WorldMap from '../components/WorldMap';
 import CTA from '../components/CTA';
+import SplashCursor from '../components/SplashCursor';
 
 export default function Homepage() {
   // 1) Declare your stats array inside the function
@@ -248,6 +249,7 @@ export default function Homepage() {
   // 2) Return your JSX, mapping over stats
   return (
     <div className="page-wrapper">
+        <SplashCursor/>
       <div className="hero-inner">
         <Navbar />
 
