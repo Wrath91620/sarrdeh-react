@@ -39,19 +39,19 @@ export default function Footer() {
           {/* Contact & Links */}
           <div className="col-md-4 text-center text-md-end">
             <p className="mb-2">
-              <i className="fas fa-phone-alt me-2" />
+              <span role="img" aria-label="Phone">📞</span>
               <a href="tel:+963941524455" className="text-white text-decoration-none">
                 +963 941524455
               </a>
             </p>
             <p className="mb-2">
-              <i className="fab fa-whatsapp me-2" />
+              <span role="img" aria-label="WhatsApp">📱</span>
               <a href="https://wa.me/963941524455" className="text-white text-decoration-none">
                 +963 941524455
               </a>
             </p>
             <p className="mb-3">
-              <i className="fas fa-envelope me-2" />
+              <span role="img" aria-label="Email">✉️</span>
               <a href="mailto:info@sarrdeh-tech.com" className="text-white text-decoration-none">
                 info@sarrdeh-tech.com
               </a>

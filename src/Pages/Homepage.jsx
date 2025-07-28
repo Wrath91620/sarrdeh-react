@@ -8,7 +8,10 @@ import ReadMoreBtn from '../components/ReadMoreBtn';
 import Journey from '../components/Journey';
 import LogoSlider from '../components/LogoSlider';
 import WorldMap from '../components/WorldMap';
-console.log('Worldnap is - ', WorldMap);
+import StarBorderButton from '../components/StarBorderButton';
+import LightRays from '../components/LightRays';
+import Particles from '../components/Particles';
+
 
 export default function Homepage() {
   // 1) Declare your stats array inside the function
@@ -249,20 +252,43 @@ export default function Homepage() {
   return (
     <div className="hero" id='hero'>
       <Navbar />
-      <section className=" services-section paddin-section">
-        <div id="particles-container"><canvas width={752} height={442}></canvas></div>
-        <div className="container text-center position-relative">
+      <section className="services-section" style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Particles - z-index: 1 */}
+        <div style={{ width: '100%', height: '600px', position: 'absolute', inset: 0, zIndex: 1 }}>
+          <Particles
+            particleColors={['#ffffff', '#ffffff']}
+            particleCount={500}
+            particleSpread={10}
+            speed={0.1}
+            particleBaseSize={50}
+            moveParticlesOnHover={true}
+            alphaParticles={false}
+            disableRotation={false}
+          />
+        </div>
+        
+        {/* Light Rays - z-index: 2 */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+          <LightRays raysColor="#57B2B6" />
+        </div>
+        
+        {/* Text Content - z-index: 3 */}
+        <div className="container text-center paddin-section" style={{ position: 'relative', zIndex: 3 }}>
           <h1 className="banner-font">
             Nowhere Else but <span style={{ color: '#57b6b2' }}>Success</span>
           </h1>
           <p className="home-banner-subtext">
             Start today and let our <span style={{ color: '#57b6b2' }}>team </span>
-            handle the rest.        </p>
-          <a href="/contact-us" className="banner-btn banner-btn-text" style={{ textDecoration: 'none' }}>
+            handle the rest.
+          </p>
+          <StarBorderButton
+            href="/contact-us"
+            className="banner-btn banner-btn-text"
+            style={{ textDecoration: 'none' }}
+          >
             Book Your Free Consultation
-          </a>
+          </StarBorderButton>
         </div>
-
       </section>
 
       <section className="py-5" id='bubble'>
@@ -330,8 +356,31 @@ export default function Homepage() {
         <div className="container">
             <Services cards={serviceCards} />
                       <div className="row g-3 justify-content-center align-items-stretch m-5">
+            <div className="col-4 d-flex justify-content-center align-items-center">
+              <StarBorderButton
+                href="/services"
+                className="banner-btn banner-btn-text"
+                style={{
+                  background: 'rgba(87, 178, 182, 0.18)',
+                  color: '#fff',
+                  padding: '15px 32px',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  fontSize: '19px',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 12px rgba(87,182,178,0.18)',
+                  border: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: 0
+                }}
+              >
+                Read More
+              </StarBorderButton>
+            </div>
 
-            <ReadMoreBtn href="/services" />
+         
           </div>
         </div>
       </section>
