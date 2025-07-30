@@ -15,6 +15,7 @@ export default function StarBorderButton({
   const btnRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const borderRadius = 5; // px, larger for pill shape
+  const padding = 15; // px, match the button padding
 
   useLayoutEffect(() => {
     if (btnRef.current) {
@@ -30,8 +31,8 @@ export default function StarBorderButton({
 
   // Calculate perimeter for smooth, continuous animation
   const perimeter = 2 * (size.width + size.height - 2 * borderRadius);
-  const dashLength = perimeter * 0.15; // Balanced segment length
-  const gapLength = perimeter * 0.35; // Balanced gap length
+  const dashLength = perimeter * 0.12; // Shorter segments for better effect
+  const gapLength = perimeter * 0.38; // Longer gaps between segments
   const dashArray = `${dashLength} ${gapLength}`;
 
   return (
@@ -46,33 +47,43 @@ export default function StarBorderButton({
         color: '#fff',
         fontWeight: 500,
         fontSize: '20px',
-        padding: '15px',
+        padding: `${padding}px`,
         border: 'none',
         textAlign: 'center',
         ...style,
       }}
       {...rest}
     >
-      {/* SVG border animation - slightly outside the button for glow */}
+      {/* SVG border animation - positioned to match button border */}
       {size.width > 0 && size.height > 0 && (
         <svg
           className="star-border-svg"
           width={size.width}
           height={size.height}
           viewBox={`0 0 ${size.width} ${size.height}`}
-          style={{ position: 'absolute', top: 0, left: 0, width: size.width, height: size.height, pointerEvents: 'none', zIndex: 0, filter: 'drop-shadow(0 0 12px #57B2B6) blur(0.5px)' }}
+          style={{ 
+            position: 'absolute', 
+            top: 0, 
+            left: 0, 
+            width: size.width, 
+            height: size.height, 
+            pointerEvents: 'none', 
+            zIndex: 0, 
+            filter: 'drop-shadow(0 0 12px #57B2B6) blur(0.5px)' 
+          }}
           aria-hidden="true"
           focusable="false"
         >
           <rect
-            x="0" y="0"
-            width={size.width}
-            height={size.height}
+            x={padding / 2}
+            y={padding / 2}
+            width={size.width - padding}
+            height={size.height - padding}
             rx={borderRadius}
             ry={borderRadius}
             fill="none"
             stroke="#57B2B6"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeDasharray={dashArray}
             strokeDashoffset="0"
             strokeLinecap="round"
@@ -81,7 +92,7 @@ export default function StarBorderButton({
               attributeName="stroke-dashoffset"
               from="0"
               to={-perimeter}
-              dur="3s"
+              dur="6s"
               repeatCount="indefinite"
               keyTimes="0;1"
               calcMode="linear"

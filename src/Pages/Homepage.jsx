@@ -11,15 +11,18 @@ import WorldMap from '../components/WorldMap';
 import StarBorderButton from '../components/StarBorderButton';
 import LightRays from '../components/LightRays';
 import Particles from '../components/Particles';
-
+import StarBorder from '../components/Animations/StarBorder/StarBorder.jsx';
+import BlurText from '../components/TextAnimations/BlurText/BlurText.jsx';
+import CountUp from '../components/TextAnimations/CountUp/CountUp.jsx';
+import CTA from '../components/CTA';
 
 export default function Homepage() {
   // 1) Declare your stats array inside the function
   const stats = [
-    { count: '225+', label: 'Visual Identity' },
-    { count: '180+', label: 'Marketing Strategy' },
-    { count: '135+', label: 'Technical Project' },
-    { count: '8+', label: 'Experience Years' },
+    { count: <><CountUp to={225} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 225, label: <>Visual<br/>Identity</> },
+    { count: <><CountUp to={180} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 180, label: <>Marketing<br/>Strategy</> },
+    { count: <><CountUp to={135} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 135, label: <>Technical<br/>Project</> },
+    { count: <><CountUp to={8} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 8, label: <>Experience<br/>Years</> },
   ];
   const serviceCards = [
     {
@@ -253,7 +256,6 @@ export default function Homepage() {
     <div className="hero" id='hero'>
       <Navbar />
       <section className="services-section" style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {/* Particles - z-index: 1 */}
         <div style={{ width: '100%', height: '600px', position: 'absolute', inset: 0, zIndex: 1 }}>
           <Particles
             particleColors={['#ffffff', '#ffffff']}
@@ -266,12 +268,11 @@ export default function Homepage() {
             disableRotation={false}
           />
         </div>
-        
         {/* Light Rays - z-index: 2 */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
           <LightRays raysColor="#57B2B6" />
         </div>
-        
+
         {/* Text Content - z-index: 3 */}
         <div className="container text-center paddin-section" style={{ position: 'relative', zIndex: 3 }}>
           <h1 className="banner-font">
@@ -281,13 +282,24 @@ export default function Homepage() {
             Start today and let our <span style={{ color: '#57b6b2' }}>team </span>
             handle the rest.
           </p>
-          <StarBorderButton
+
+                     <div className="col-6 d-flex align-content-center justify-content-center p-3" style={{justifySelf: "center"}}>
+             <BlurText
+               text="At SarrdehTech, our mission is to provide integrated digital marketing and web development 
+               solutions that help you stand out, get noticed, and achieve clear, tangible results and insights."
+               delay={150}
+               animateBy="words"
+               direction="top"
+               onAnimationComplete={() => {}}
+               className="text-2xl mb-8 justify-content-center align-items-center"
+             />
+           </div>
+          <StarBorder color='#57b6b2' speed='5s'
             href="/contact-us"
-            className="banner-btn banner-btn-text"
             style={{ textDecoration: 'none' }}
           >
             Book Your Free Consultation
-          </StarBorderButton>
+          </StarBorder>
         </div>
       </section>
 
@@ -299,6 +311,7 @@ export default function Homepage() {
               <Bubble
                 key={idx}
                 count={stat.count}
+                countValue={stat.countValue}
                 label={stat.label}
               />
             ))}
@@ -354,33 +367,21 @@ export default function Homepage() {
       </section>
       <section id='service cards' className="py-5 values-sec-right values-sec-left ">
         <div className="container">
-            <Services cards={serviceCards} />
-                      <div className="row g-3 justify-content-center align-items-stretch m-5">
+          <Services cards={serviceCards} />
+          <div className="row g-3 justify-content-center align-items-stretch m-5">
             <div className="col-4 d-flex justify-content-center align-items-center">
-              <StarBorderButton
-                href="/services"
-                className="banner-btn banner-btn-text"
+              <StarBorder
+                href="/services" color='#57b6b2' speed='5s'
+                
                 style={{
-                  background: 'rgba(87, 178, 182, 0.18)',
-                  color: '#fff',
-                  padding: '15px 32px',
-                  borderRadius: '8px',
-                  fontWeight: 600,
-                  fontSize: '19px',
-                  textDecoration: 'none',
-                  boxShadow: '0 2px 12px rgba(87,182,178,0.18)',
-                  border: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 0
+                  textDecoration: 'none'
                 }}
               >
                 Read More
-              </StarBorderButton>
+              </StarBorder>
             </div>
 
-         
+
           </div>
         </div>
       </section>
@@ -410,6 +411,9 @@ export default function Homepage() {
         <WorldMap markers={markers} />
       </section>
 
+      <section className="mb-5 p-0">
+        <CTA />
+      </section>
 
       <Footer />
     </div>
