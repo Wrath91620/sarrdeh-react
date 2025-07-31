@@ -5,7 +5,7 @@ import Bubble from '../components/Bubble';
 import Services from '../components/Services';
 import Footer from '../components/Footer';
 import ReadMoreBtn from '../components/ReadMoreBtn';
-import Journey from '../components/Journey';
+import ScrollStack, { ScrollStackItem } from '../components/Components/ScrollStack/ScrollStack';
 import LogoSlider from '../components/LogoSlider';
 import WorldMap from '../components/WorldMap';
 import StarBorderButton from '../components/StarBorderButton';
@@ -15,14 +15,15 @@ import StarBorder from '../components/Animations/StarBorder/StarBorder.jsx';
 import BlurText from '../components/TextAnimations/BlurText/BlurText.jsx';
 import CountUp from '../components/TextAnimations/CountUp/CountUp.jsx';
 import CTA from '../components/CTA';
+import Threads from '../components/Backgrounds/Threads/Threads.jsx';
 
 export default function Homepage() {
   // 1) Declare your stats array inside the function
   const stats = [
-    { count: <><CountUp to={225} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 225, label: <>Visual<br/>Identity</> },
-    { count: <><CountUp to={180} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 180, label: <>Marketing<br/>Strategy</> },
-    { count: <><CountUp to={135} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 135, label: <>Technical<br/>Project</> },
-    { count: <><CountUp to={8} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 8, label: <>Experience<br/>Years</> },
+    { count: <><CountUp to={225} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 225, label: <>Visual<br />Identity</> },
+    { count: <><CountUp to={180} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 180, label: <>Marketing<br />Strategy</> },
+    { count: <><CountUp to={135} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 135, label: <>Technical<br />Project</> },
+    { count: <><CountUp to={8} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 8, label: <>Experience<br />Years</> },
   ];
   const serviceCards = [
     {
@@ -256,7 +257,15 @@ export default function Homepage() {
     <div className="hero" id='hero'>
       <Navbar />
       <section className="services-section" style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: '100%', height: '600px', position: 'absolute', inset: 0, zIndex: 1 }}>
+        <div style={{
+          width: '160%',
+          height: '160%',
+          position: 'absolute',
+          top: '-30%',
+          left: '-30%',
+          zIndex: 1,
+          overflow: 'visible'
+        }}>
           <Particles
             particleColors={['#ffffff', '#ffffff']}
             particleCount={500}
@@ -264,12 +273,20 @@ export default function Homepage() {
             speed={0.1}
             particleBaseSize={50}
             moveParticlesOnHover={true}
-            alphaParticles={false}
+            alphaParticles={true}
             disableRotation={false}
           />
         </div>
         {/* Light Rays - z-index: 2 */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+        <div style={{
+          position: 'absolute',
+          top: '-30%',
+          left: '-30%',
+          width: '160%',
+          height: '160%',
+          zIndex: 2,
+          overflow: 'visible'
+        }}>
           <LightRays raysColor="#57B2B6" />
         </div>
 
@@ -283,17 +300,17 @@ export default function Homepage() {
             handle the rest.
           </p>
 
-                     <div className="col-6 d-flex align-content-center justify-content-center p-3" style={{justifySelf: "center"}}>
-             <BlurText
-               text="At SarrdehTech, our mission is to provide integrated digital marketing and web development 
+          <div className="col-6 d-flex align-content-center justify-content-center p-3" style={{ justifySelf: "center" }}>
+            <BlurText
+              text="At SarrdehTech, our mission is to provide integrated digital marketing and web development 
                solutions that help you stand out, get noticed, and achieve clear, tangible results and insights."
-               delay={150}
-               animateBy="words"
-               direction="top"
-               onAnimationComplete={() => {}}
-               className="text-2xl mb-8 justify-content-center align-items-center"
-             />
-           </div>
+              delay={150}
+              animateBy="words"
+              direction="top"
+              onAnimationComplete={() => { }}
+              className="text-2xl mb-8 justify-content-center align-items-center"
+            />
+          </div>
           <StarBorder color='#57b6b2' speed='5s'
             href="/contact-us"
             style={{ textDecoration: 'none' }}
@@ -318,7 +335,7 @@ export default function Homepage() {
           </div>
         </div>
       </section>
-      <section className="section-content relative py-5 values-sec-right values-sec-left " id='sarrdeh in short'>
+      <section className="section-content relative py-5" id='sarrdeh in short'>
         {/* Header */}
         <div className="row row-collapse align-equal align-center mb-4">
           <div className="col small-12 large-12">
@@ -365,14 +382,14 @@ export default function Homepage() {
 
         </div>
       </section>
-      <section id='service cards' className="py-5 values-sec-right values-sec-left ">
+      <section id='service cards' className="py-5">
         <div className="container">
           <Services cards={serviceCards} />
           <div className="row g-3 justify-content-center align-items-stretch m-5">
             <div className="col-4 d-flex justify-content-center align-items-center">
               <StarBorder
                 href="/services" color='#57b6b2' speed='5s'
-                
+
                 style={{
                   textDecoration: 'none'
                 }}
@@ -385,12 +402,104 @@ export default function Homepage() {
           </div>
         </div>
       </section>
-      <section
-        id="journey"
-        className="py-5 journey-row values-sec-right"
-      >
-        <div className='row justify-content-center align-content-center team-title m-5 '>Your Journey With Us</div>
-        <Journey steps={steps} />
+               <section
+           id="journey"
+           className="py-5 journey-row"
+           style={{ position: 'relative' }}
+         >
+        {/* Threads Background */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 1,
+          overflow: 'hidden'
+        }}>
+          <Threads
+            color={[0.34, 0.71, 0.71]} // #57B6B2 in RGB
+            amplitude={0.5}
+            distance={0.1}
+            enableMouseInteraction={true}
+          />
+        </div>
+
+        <div className='row justify-content-center align-content-center team-title' style={{ position: 'relative', zIndex: 2 }}>Your Journey With Us</div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="row justify-content-center">
+            <div className="col-12">
+              <div style={{ height: '80vh' }}>
+                <ScrollStack
+                  itemDistance={100}
+                  itemScale={0.03}
+                  itemStackDistance={30}
+                  stackPosition="20%"
+                  scaleEndPosition="10%"
+                  baseScale={0.85}
+                  rotationAmount={0}
+                  blurAmount={1}
+                  onStackComplete={() => {
+                    console.log('Journey stack completed');
+                    // Enable page scrolling after stack completion
+                    const scrollStackElement = document.querySelector('.scroll-stack-scroller');
+                    if (scrollStackElement) {
+                      scrollStackElement.classList.add('completed');
+                    }
+
+                    // Add scroll listener to detect when scrolling back up
+                    const handlePageScroll = () => {
+                      const scrollStackElement = document.querySelector('.scroll-stack-scroller');
+                      if (scrollStackElement && scrollStackElement.classList.contains('completed')) {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const journeySection = document.getElementById('journey');
+                        if (journeySection) {
+                          const sectionTop = journeySection.offsetTop;
+                          const sectionHeight = journeySection.offsetHeight;
+
+                          // If we're scrolling back up and the section is in view
+                          if (scrollTop < (sectionTop + sectionHeight - 200)) {
+                            scrollStackElement.classList.remove('completed');
+                            // Remove the scroll listener since we're back in the stack
+                            window.removeEventListener('scroll', handlePageScroll);
+                          }
+                        }
+                      }
+                    };
+
+                    window.addEventListener('scroll', handlePageScroll);
+                  }}
+                >
+                  {steps.map((step, i) => (
+                    <ScrollStackItem key={i}>
+                      <div className="journey-step">
+                        <div className="step-number">{step.number}</div>
+                        <div className="step-content">
+                          <BlurText
+                            text={step.title}
+                            delay={10 + (i * 10)}
+                            animateBy="words"
+                            direction="top"
+                            onAnimationComplete={() => { }}
+                            className="step-title"
+                          />
+                          <BlurText
+                            text={step.description}
+                            delay={20 + (i * 10)}
+                            animateBy="words"
+                            direction="top"
+                            onAnimationComplete={() => { }}
+                            className="step-description"
+                          />
+                        </div>
+                      </div>
+                    </ScrollStackItem>
+                  ))}
+                </ScrollStack>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <section id='partners' className='py-5'>
         <div className='row justify-content-center align-content-center team-title m-5 '>Partners In Success</div>

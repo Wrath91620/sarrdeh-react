@@ -602,7 +602,7 @@ g.home-subtext {
     background-color: #000;
     color: #fff;
     position: relative;
-
+    overflow-x: hidden;
 
 
 }
@@ -1800,7 +1800,7 @@ g.home-subtext {
 }
 
 .journey-row {
-  background: url('./assets/fonts/images/Vector-14.png') no-repeat center center ;
+  /* background: url('./assets/fonts/images/Vector-14.png') no-repeat center center ; */
     position: relative;
 
 }
@@ -2458,7 +2458,7 @@ a.nav-top-link:hover {
     width: 100%;
     height: 100%;
     overflow: visible;
-  }
+}
 
 .partner-logo img.ux-logo-image.block {
     height: 64px !important;
@@ -3312,6 +3312,7 @@ textarea {
 .map-container {
   position: relative;
   width: 100%;
+  max-width: 1290px;
   margin: 0 auto;
 }
 
@@ -3510,8 +3511,130 @@ textarea {
 .light-rays-container {
     width: 100%;
     height: 100%;
-    position: relative;
+  position: relative;
     pointer-events: none;
     z-index: 3;
-    overflow: hidden;
-  }
+    overflow: visible;
+}
+
+/* Journey Steps in ScrollStack */
+.journey-step {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(87, 182, 178, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+
+
+
+.step-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #57b6b2;
+  min-width: 60px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(87, 182, 178, 0.5);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 10;
+}
+
+.step-description {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 10;
+}
+
+/* ScrollStack Customization */
+.scroll-stack-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto !important;
+  min-height: 120px;
+}
+
+.scroll-stack-card .journey-step {
+  height: 100%;
+  min-height: 120px;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scroll-stack-scroller {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  transition: all 0.3s ease;
+}
+
+.scroll-stack-scroller::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Smooth transitions for ScrollStack */
+.scroll-stack-scroller {
+  transition: all 0.4s ease;
+}
+
+/* When stack is completed, allow page scroll to take over */
+.scroll-stack-scroller.completed {
+  overflow-y: hidden !important;
+  pointer-events: none;
+}
+
+/* Add nice gaps between journey steps */
+.scroll-stack-card {
+  margin-bottom: 3rem !important;
+  height: auto !important;
+  min-height: 140px !important;
+}
+
+.scroll-stack-card:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Ensure consistent journey step sizing */
+.journey-step {
+  min-height: 140px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+

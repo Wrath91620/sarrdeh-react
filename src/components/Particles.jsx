@@ -32,6 +32,7 @@ const vertex = /* glsl */ `
   
   varying vec4 vRandom;
   varying vec3 vColor;
+  varying vec3 vPosition;
   
   void main() {
     vRandom = random;
@@ -46,6 +47,7 @@ const vertex = /* glsl */ `
     mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
     mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
     
+    vPosition = mPos.xyz;
     vec4 mvPos = viewMatrix * mPos;
     gl_PointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz);
     gl_Position = projectionMatrix * mvPos;
@@ -57,21 +59,28 @@ const fragment = /* glsl */ `
   
   uniform float uTime;
   uniform float uAlphaParticles;
+  uniform vec2 uResolution;
   varying vec4 vRandom;
   varying vec3 vColor;
+  varying vec3 vPosition;
   
   void main() {
     vec2 uv = gl_PointCoord.xy;
     float d = length(uv - vec2(0.5));
     
+    // Calculate distance from center for fade effect
+    vec2 screenPos = gl_FragCoord.xy / uResolution.xy;
+    float distanceFromCenter = length(screenPos - vec2(0.5));
+    float fadeFactor = 1.0 - smoothstep(0.3, 0.8, distanceFromCenter);
+    
     if(uAlphaParticles < 0.5) {
       if(d > 0.5) {
         discard;
       }
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
+      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), fadeFactor);
     } else {
       float circle = smoothstep(0.5, 0.4, d) * 0.8;
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), circle);
+      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), circle * fadeFactor);
     }
   }
 `;
@@ -104,26 +113,6 @@ const Particles = ({
 
     const camera = new OGL.Camera(gl, { fov: 15 });
     camera.position.set(0, 0, cameraDistance);
-
-    const resize = () => {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      renderer.setSize(width, height);
-      camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
-    };
-    window.addEventListener("resize", resize, false);
-    resize();
-
-    const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      mouseRef.current = { x, y };
-    };
-
-    if (moveParticlesOnHover) {
-      container.addEventListener("mousemove", handleMouseMove);
-    }
 
     const count = particleCount;
     const positions = new Float32Array(count * 3);
@@ -161,10 +150,32 @@ const Particles = ({
         uBaseSize: { value: particleBaseSize },
         uSizeRandomness: { value: sizeRandomness },
         uAlphaParticles: { value: alphaParticles ? 1 : 0 },
+        uResolution: { value: [gl.canvas.width, gl.canvas.height] },
       },
       transparent: true,
       depthTest: false,
     });
+
+    const resize = () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      renderer.setSize(width, height);
+      camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
+      program.uniforms.uResolution.value = [gl.canvas.width, gl.canvas.height];
+    };
+    window.addEventListener("resize", resize, false);
+    resize();
+
+    const handleMouseMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      mouseRef.current = { x, y };
+    };
+
+    if (moveParticlesOnHover) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
 
     const particles = new OGL.Mesh(gl, { mode: gl.POINTS, geometry, program });
 
