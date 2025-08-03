@@ -27,6 +27,7 @@ const BlurText = ({
   easing = (t) => t,
   onAnimationComplete,
   stepDuration = 0.35,
+  highlightWords = [],
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -93,9 +94,13 @@ const BlurText = ({
         };
         (spanTransition).ease = easing;
 
+        const isHighlighted = highlightWords.some(word => 
+          segment.toLowerCase().includes(word.toLowerCase())
+        );
+        
         return (
           <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
+            className={`inline-block will-change-[transform,filter,opacity] ${isHighlighted ? 'sarrdehTech' : ''}`}
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}

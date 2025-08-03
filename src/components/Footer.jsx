@@ -10,16 +10,16 @@ export default function Footer() {
           {/* Social & Copy */}
           <div className="col-md-4 mb-4 mb-md-0 text-center text-md-start">
             <div className="mb-3">
-              <a href="#" className="me-3 text-white">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="me-3 text-white">
                 <img src='images/facebook.svg' alt='Facebook'/>
               </a>
-              <a href="#" className="me-3 text-white">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="me-3 text-white">
                 <img src='images/instagram.svg' alt='instagram'/>
               </a>
-              <a href="#" className="me-3 text-white">
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="me-3 text-white">
                 <img src='images/tiktok.svg' alt='tiktok' />
               </a>
-              <a href="#" className="text-white">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white">
                 <img src='images/linkedin.svg' alt='linkedin'/>
               </a>
             </div>
@@ -58,10 +58,12 @@ export default function Footer() {
             </p>
 
             <div>
-              <a href="#" className="footer-text-links">
-                Privacy Policy              </a>
-              <a href="#" className="footer-text-links">
-                FAQ              </a>
+              <a href="/privacy-policy" className="footer-text-links">
+                Privacy Policy
+              </a>
+              <a href="/faq" className="footer-text-links">
+                FAQ
+              </a>
             </div>
           </div>
 

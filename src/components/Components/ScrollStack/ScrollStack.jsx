@@ -12,7 +12,7 @@ const ScrollStack = ({
   itemDistance = 100,
   itemScale = 0.03,
   itemStackDistance = 30,
-  stackPosition = "20%",
+  stackPosition ="35%",
   scaleEndPosition = "10%",
   baseScale = 0.85,
   scaleDuration = 0.5,
@@ -58,6 +58,8 @@ const ScrollStack = ({
       const cardTop = card.offsetTop;
       const triggerStart = cardTop - stackPositionPx - (itemStackDistance * i);
       const triggerEnd = cardTop - scaleEndPositionPx;
+      const pinStart = cardTop - stackPositionPx - (itemStackDistance * i);
+
 
       const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
       const targetScale = baseScale + (i * itemScale);
@@ -82,7 +84,9 @@ const ScrollStack = ({
       }
 
       let translateY = 0;
-      if (scrollTop >= triggerStart) {
+      const isPinned = scrollTop >= pinStart;
+      
+      if (isPinned) {
         translateY = scrollTop - cardTop + stackPositionPx + (itemStackDistance * i);
       }
 
@@ -110,15 +114,12 @@ const ScrollStack = ({
         lastTransformsRef.current.set(i, newTransform);
       }
 
-      // Check if all cards are stacked (completion detection)
       if (i === cardsRef.current.length - 1) {
-        const isFullyStacked = scrollTop >= (triggerStart + itemStackDistance * 2);
-        
-        if (isFullyStacked && !stackCompletedRef.current) {
+        const isInView = scrollTop >= pinStart;
+        if (isInView && !stackCompletedRef.current) {
           stackCompletedRef.current = true;
           onStackComplete?.();
-        } else if (!isFullyStacked && stackCompletedRef.current) {
-          // Reverse animation - unstacking when scrolling back up
+        } else if (!isInView && stackCompletedRef.current) {
           stackCompletedRef.current = false;
         }
       }
@@ -235,6 +236,8 @@ const ScrollStack = ({
     >
       <div className="scroll-stack-inner">
         {children}
+        {/* Spacer so the last pin can release cleanly */}
+        <div className="scroll-stack-end" />
       </div>
     </div>
   );

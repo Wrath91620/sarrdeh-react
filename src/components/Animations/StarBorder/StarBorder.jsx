@@ -9,7 +9,7 @@ const StarBorder = ({
   children,
   ...rest
 }) => {
-  console.log('StarBorder props:', { color, speed, thickness, className });
+
   return (
     <Component 
       className={`star-border-container ${className}`} 

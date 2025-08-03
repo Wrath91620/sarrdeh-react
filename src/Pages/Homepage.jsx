@@ -4,11 +4,9 @@ import Navbar from '../components/Navbar';
 import Bubble from '../components/Bubble';
 import Services from '../components/Services';
 import Footer from '../components/Footer';
-import ReadMoreBtn from '../components/ReadMoreBtn';
 import ScrollStack, { ScrollStackItem } from '../components/Components/ScrollStack/ScrollStack';
 import LogoSlider from '../components/LogoSlider';
 import WorldMap from '../components/WorldMap';
-import StarBorderButton from '../components/StarBorderButton';
 import LightRays from '../components/LightRays';
 import Particles from '../components/Particles';
 import StarBorder from '../components/Animations/StarBorder/StarBorder.jsx';
@@ -18,6 +16,39 @@ import CTA from '../components/CTA';
 import Threads from '../components/Backgrounds/Threads/Threads.jsx';
 
 export default function Homepage() {
+  const [stackCompleted, setStackCompleted] = React.useState(false);
+  const [isTransitioning, setIsTransitioning] = React.useState(false);
+  const scrollStackRef = React.useRef(null);
+  const nextSectionRef = React.useRef(null);
+
+  const handleStackComplete = React.useCallback(() => {
+    setStackCompleted(true);
+    setIsTransitioning(true);
+    
+    // Smooth scroll to next section after a brief delay
+    setTimeout(() => {
+      if (nextSectionRef.current) {
+        nextSectionRef.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+      // Reset transition state after scroll completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1000);
+    }, 300);
+  }, []);
+
+  // Cleanup effect to prevent memory leaks
+  React.useEffect(() => {
+    return () => {
+      // Cleanup any pending timeouts
+      setStackCompleted(false);
+      setIsTransitioning(false);
+    };
+  }, []);
+
   // 1) Declare your stats array inside the function
   const stats = [
     { count: <><CountUp to={225} from={0} duration={2} delay={0} separator="," startWhen={true} />+</>, countValue: 225, label: <>Visual<br />Identity</> },
@@ -48,28 +79,7 @@ export default function Homepage() {
     },
   ];
 
-  const steps = [
-    {
-      number: '01',
-      title: 'Custom Consultation',
-      description: 'We begin with a session to understand your idea, needs, and goals in detail.',
-    },
-    {
-      number: '02',
-      title: 'Planning & Strategy',
-      description: 'We analyze your project and lay out a clear marketing and technical roadmap.',
-    },
-    {
-      number: '03',
-      title: 'Execution',
-      description: 'We carry out the plans efficiently according to a precise timeline and high-quality standards.',
-    },
-    {
-      number: '04',
-      title: 'Evaluation & Improvement',
-      description: 'We monitor results, analyze performance, and suggest enhancements to ensure continued success.',
-    },
-  ];
+
 
   const logos = [
     '/images/Atlas-logo-01_result.webp',
@@ -302,13 +312,13 @@ export default function Homepage() {
 
           <div className="col-6 d-flex align-content-center justify-content-center p-3" style={{ justifySelf: "center" }}>
             <BlurText
-              text="At SarrdehTech, our mission is to provide integrated digital marketing and web development 
-               solutions that help you stand out, get noticed, and achieve clear, tangible results and insights."
+              text="At SarrdehTech our mission is to provide integrated digital marketing and web development solutions that help you stand out get noticed and achieve clear tangible results and insights."
               delay={150}
               animateBy="words"
               direction="top"
               onAnimationComplete={() => { }}
               className="text-2xl mb-8 justify-content-center align-items-center"
+              highlightWords={['SarrdehTech']}
             />
           </div>
           <StarBorder color='#57b6b2' speed='5s'
@@ -336,50 +346,52 @@ export default function Homepage() {
         </div>
       </section>
       <section className="section-content relative py-5" id='sarrdeh in short'>
-        {/* Header */}
-        <div className="row row-collapse align-equal align-center mb-4">
-          <div className="col small-12 large-12">
-            <div className="col-inner text-center">
-              <h2 className="section-names">
-                <span style={{ color: '#57b6b2' }}>Sarrdeh</span> In Short
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="row row-collapse align-middle">
-
-          {/* Image Column */}
-          <div className="col img-col medium-6 small-12 large-6">
-            <div className="col-inner text-center img-logo">
-              <img
-                src="images/logo.png"
-                alt="SarrdehTech Logo"
-                width={165}
-                height={292}
-                className="img-fluid"
-              />
-            </div>
-          </div>
-          {/* Text Column */}
-          <div className="col text-col medium-6 small-12 large-6 p-5">
-            <div className="col-inner">
-              <p className="banner-par mb-3" style={{ padding: 0 }}>
-                We are a dedicated <span className='sarrdehTech-par'>team</span> of strategic thinkers, innovative developers,
-                and professional designers. We believe that every purpose-driven brand
-                has a unique story and remarkable ideas that deserve to be told in detail.
-              </p>
-              <p className="banner-par" style={{ padding: 0 }}>
-                Our mission is to empower your business in a fiercely competitive market
-                through advanced marketing strategies, top-tier development expertise,
-                and compelling design. Together, we’ll bring our <span className="sarrdehTech-par">vision</span> to life,
-                creating meaningful impact and achieving the results you aspire to.
-              </p>
+        <div style={{ maxWidth: '1290px', margin: '0 auto', padding: '0 15px' }}>
+          {/* Header */}
+          <div className="row row-collapse align-equal align-center mb-4">
+            <div className="col small-12 large-12">
+              <div className="col-inner text-center">
+                <h2 className="section-names">
+                  <span style={{ color: '#57b6b2' }}>Sarrdeh</span> In Short
+                </h2>
+              </div>
             </div>
           </div>
 
+          {/* Content */}
+          <div className="row row-collapse align-middle">
 
+            {/* Image Column */}
+            <div className="col img-col medium-6 small-12 large-6">
+              <div className="col-inner text-center img-logo">
+                <img
+                  src="images/logo.png"
+                  alt="SarrdehTech Logo"
+                  width={165}
+                  height={292}
+                  className="img-fluid"
+                />
+              </div>
+            </div>
+            {/* Text Column */}
+            <div className="col text-col medium-6 small-12 large-6 p-5">
+              <div className="col-inner">
+                <p className="banner-par mb-3" style={{ padding: 0 }}>
+                  We are a dedicated <span className='sarrdehTech-par'>team</span> of strategic thinkers, innovative developers,
+                  and professional designers. We believe that every purpose-driven brand
+                  has a unique story and remarkable ideas that deserve to be told in detail.
+                </p>
+                <p className="banner-par" style={{ padding: 0 }}>
+                  Our mission is to empower your business in a fiercely competitive market
+                  through advanced marketing strategies, top-tier development expertise,
+                  and compelling design. Together, we'll bring our <span className="sarrdehTech-par">vision</span> to life,
+                  creating meaningful impact and achieving the results you aspire to.
+                </p>
+              </div>
+            </div>
+
+
+          </div>
         </div>
       </section>
       <section id='service cards' className="py-5">
@@ -405,7 +417,12 @@ export default function Homepage() {
                <section
            id="journey"
            className="py-5 journey-row"
-           style={{ position: 'relative' }}
+           style={{ 
+             position: 'relative',
+             minHeight: '100vh',
+             overflow: 'hidden',
+       
+           }}
          >
         {/* Threads Background */}
         <div style={{
@@ -429,79 +446,110 @@ export default function Homepage() {
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="row justify-content-center">
             <div className="col-12">
-              <div style={{ height: '80vh' }}>
-                <ScrollStack
-                  itemDistance={100}
-                  itemScale={0.03}
-                  itemStackDistance={30}
-                  stackPosition="20%"
-                  scaleEndPosition="10%"
-                  baseScale={0.85}
-                  rotationAmount={0}
-                  blurAmount={1}
-                  onStackComplete={() => {
-                    console.log('Journey stack completed');
-                    // Enable page scrolling after stack completion
-                    const scrollStackElement = document.querySelector('.scroll-stack-scroller');
-                    if (scrollStackElement) {
-                      scrollStackElement.classList.add('completed');
-                    }
-
-                    // Add scroll listener to detect when scrolling back up
-                    const handlePageScroll = () => {
-                      const scrollStackElement = document.querySelector('.scroll-stack-scroller');
-                      if (scrollStackElement && scrollStackElement.classList.contains('completed')) {
-                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                        const journeySection = document.getElementById('journey');
-                        if (journeySection) {
-                          const sectionTop = journeySection.offsetTop;
-                          const sectionHeight = journeySection.offsetHeight;
-
-                          // If we're scrolling back up and the section is in view
-                          if (scrollTop < (sectionTop + sectionHeight - 200)) {
-                            scrollStackElement.classList.remove('completed');
-                            // Remove the scroll listener since we're back in the stack
-                            window.removeEventListener('scroll', handlePageScroll);
-                          }
-                        }
-                      }
-                    };
-
-                    window.addEventListener('scroll', handlePageScroll);
-                  }}
-                >
-                  {steps.map((step, i) => (
-                    <ScrollStackItem key={i}>
-                      <div className="journey-step">
-                        <div className="step-number">{step.number}</div>
-                        <div className="step-content">
-                          <BlurText
-                            text={step.title}
-                            delay={10 + (i * 10)}
-                            animateBy="words"
-                            direction="top"
-                            onAnimationComplete={() => { }}
-                            className="step-title"
-                          />
-                          <BlurText
-                            text={step.description}
-                            delay={20 + (i * 10)}
-                            animateBy="words"
-                            direction="top"
-                            onAnimationComplete={() => { }}
-                            className="step-description"
-                          />
-                        </div>
+              <div 
+                ref={scrollStackRef}
+                style={{ 
+                  height: '80vh', 
+                  overflow: 'hidden',
+                  opacity: isTransitioning ? 0.9 : 1,
+                  transition: 'opacity 0.8s ease',
+                  position: 'relative',
+                  zIndex: 2
+                }}
+              >
+                <ScrollStack onStackComplete={handleStackComplete}>
+                  <ScrollStackItem>
+                    <div className="journey-step">
+                      <div className="step-number">01</div>
+                      <div className="step-content">
+                        <BlurText 
+                          text="Custom Consultation" 
+                          className="step-title"
+                          delay={100}
+                          direction="top"
+                        />
+                        <BlurText 
+                          text="We begin with a session to understand your idea, needs, and goals in detail." 
+                          className="step-description"
+                          delay={150}
+                          direction="top"
+                        />
                       </div>
-                    </ScrollStackItem>
-                  ))}
+                    </div>
+                  </ScrollStackItem>
+                  <ScrollStackItem>
+                    <div className="journey-step">
+                      <div className="step-number">02</div>
+                      <div className="step-content">
+                        <BlurText 
+                          text="Planning & Strategy" 
+                          className="step-title"
+                          delay={100}
+                          direction="top"
+                        />
+                        <BlurText 
+                          text="We analyze your project and lay out a clear marketing and technical roadmap." 
+                          className="step-description"
+                          delay={150}
+                          direction="top"
+                        />
+                      </div>
+                    </div>
+                  </ScrollStackItem>
+                  <ScrollStackItem>
+                    <div className="journey-step">
+                      <div className="step-number">03</div>
+                      <div className="step-content">
+                        <BlurText 
+                          text="Execution" 
+                          className="step-title"
+                          delay={100}
+                          direction="top"
+                        />
+                        <BlurText 
+                          text="We carry out the plans efficiently according to a precise timeline and high-quality standards." 
+                          className="step-description"
+                          delay={150}
+                          direction="top"
+                        />
+                      </div>
+                    </div>
+                  </ScrollStackItem>
+                  <ScrollStackItem>
+                    <div className="journey-step">
+                      <div className="step-number">04</div>
+                      <div className="step-content">
+                        <BlurText 
+                          text="Evaluation & Improvement" 
+                          className="step-title"
+                          delay={100}
+                          direction="top"
+                        />
+                        <BlurText 
+                          text="We monitor results, analyze performance, and suggest enhancements to ensure continued success." 
+                          className="step-description"
+                          delay={150}
+                          direction="top"
+                        />
+                      </div>
+                    </div>
+                  </ScrollStackItem>
                 </ScrollStack>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section id='partners' className='py-5'>
+      <section 
+        ref={nextSectionRef}
+        id='partners' 
+        className='py-5'
+        style={{
+          opacity: stackCompleted ? 1 : 0.3,
+          transform: stackCompleted ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'opacity 0.8s ease, transform 0.8s ease'
+        }}
+      >
         <div className='row justify-content-center align-content-center team-title m-5 '>Partners In Success</div>
         <LogoSlider
           logos={logos}

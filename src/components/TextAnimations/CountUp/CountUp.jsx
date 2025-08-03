@@ -55,7 +55,7 @@ export default function CountUp({
       }, delay * 1000);
 
       const durationTimeoutId = setTimeout(() => {
-        console.log('CountUp onEnd callback triggered for:', to); // Debug log
+    
         if (typeof onEnd === "function") onEnd();
       }, delay * 1000 + duration * 1000);
 

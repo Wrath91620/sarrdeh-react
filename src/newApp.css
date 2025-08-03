@@ -42,7 +42,7 @@ g.home-subtext {
     justify-content: center;
 }
 
-/* this pseudo makes the “inset box-shadow” effect */
+/* this pseudo makes the "inset box-shadow" effect */
 .bubble::before {
     content: "";
     position: absolute;
@@ -116,15 +116,11 @@ g.home-subtext {
     font-family: var(--Typfce-family-text, LBC);
     font-size: var(--Typfce-size-md, 16px);
     font-style: normal;
-    font-weight: 700;
+    font-weight: 900;
     line-height: var(--Typfce-line-hight-body, 30px);
     /* 187.5% */
     letter-spacing: 0.5px;
-    text-shadow:
-        /* tiny sharp highlight */
-        0 0 2px #fff,
-        /* soft outer glow */
-        0 0 6px rgba(255, 255, 255, 0.5);
+    
 }
 
 .banner-btn {
@@ -213,7 +209,7 @@ g.home-subtext {
 
 
 
-/* 2) Your top‐bar pseudo remains exactly as you had it, casting glow downward */
+/* 2) Your top-bar pseudo remains exactly as you had it, casting glow downward */
 .services-card-home .col-inner::before {
     content: "";
     position: absolute;
@@ -237,7 +233,7 @@ g.home-subtext {
         drop-shadow(0 0.8px 0.8px var(--accent)) drop-shadow(0 1.4px 1.4px var(--accent)) drop-shadow(0 4.4px 4.4px var(--accent)) drop-shadow(0 10.9px 10.9px var(--accent)) drop-shadow(0 20.9px 20.9px var(--accent)) drop-shadow(0 30.6px 30.6px var(--accent));
 }
 
-/* 3) On hover:  lift card & boost inner glow so it “shines through” */
+/* 3) On hover:  lift card & boost inner glow so it "shines through" */
 .services-card-home:hover .col-inner {
     transform: translateY(-12px);
     z-index: 2;
@@ -367,7 +363,7 @@ g.home-subtext {
     transition: transform 0.3s ease;
 }
 
-/* 2) Just four “modifier” classes that swap out the color */
+/* 2) Just four "modifier" classes that swap out the color */
 .bordered-text.programming {
     --bt-color: #9DFCF8;
 }
@@ -1522,7 +1518,7 @@ g.home-subtext {
     opacity: 1;
 }
 
-/* 2) Create the “background box” behind the center logo via ::before on .ux-logo.is-selected */
+/* 2) Create the "background box" behind the center logo via ::before on .ux-logo.is-selected */
 .first-slider .flickity-slider .ux-logo.is-selected::before {
     content: "";
     position: absolute;
@@ -1567,7 +1563,7 @@ g.home-subtext {
     transform: scale(1.05);
 }
 
-/* 5) Ensure the slider is tall enough so all three “feet” line up */
+/* 5) Ensure the slider is tall enough so all three "feet" line up */
 .flickity-slider {
     min-height: 550px;
     /* at least box-height (500px) + overlap (40px) + a bit extra */
@@ -1580,9 +1576,9 @@ g.home-subtext {
     align-items: flex-end;
 }
 
-/* 7) If Flickity is adding inline “right:” or “width:” styles, you can still override */
+/* 7) If Flickity is adding inline "right:" or "width:" styles, you can still override */
 .first-slider .flickity-slider .ux-logo {
-    /* Force a fixed width on each item (instead of Flickity’s inline width): */
+    /* Force a fixed width on each item (instead of Flickity's inline width): */
     max-width: 200px !important;
     width: 200px !important;
 }
@@ -1665,7 +1661,7 @@ g.home-subtext {
     letter-spacing: 0.5px;
 }
 
-/* 1) Target your column’s custom class */
+/* 1) Target your column's custom class */
 .values-box::before {
     content: "";
     position: absolute;
@@ -1744,7 +1740,7 @@ g.home-subtext {
 
 /*─────────────────────────────────────────────────────────*/
 /* 2) ::before draws the transparent‐to‐transparent gradient */
-/*    and blurs it by ~24.55px behind each card’s image.   */
+/*    and blurs it by ~24.55px behind each card's image.   */
 /*─────────────────────────────────────────────────────────*/
 .my-custom-slider .ux-logo::before {
     content: "";
@@ -1909,7 +1905,7 @@ g.home-subtext {
     background: #57B6B2;
     filter: blur(175px);
     pointer-events: none;
-    /* makes sure it doesn’t block clicks */
+    /* makes sure it doesn't block clicks */
 }
 
 .right-shadow {
@@ -2327,12 +2323,7 @@ a.button.secondary.is-outline {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    letter-spacing: 0.5px;
-    text-shadow:
-        0 0 5px #57B6B2,
-        0 0 10px #57B6B2,
-        0 0 15px #57B6B2,
-        0 0 17.5px #57B6B2;
+    
 }
 
 .banner-btn-text:after {
@@ -2359,7 +2350,7 @@ a.button.secondary.is-outline {
 }
 
 a.nav-top-link {
-    /* set your “resting” padding here so it can tween to the hover value */
+    /* set your "resting" padding here so it can tween to the hover value */
     padding: 4px 12px;
     display: inline-flex;
     align-items: center;
@@ -3581,14 +3572,14 @@ textarea {
   z-index: 10;
 }
 
-/* ScrollStack Customization */
+/* ScrollStack Customization - Minimal styling to avoid conflicts */
 .scroll-stack-card {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  height: auto !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  height: auto;
   min-height: 120px;
 }
 
@@ -3601,40 +3592,11 @@ textarea {
 .scroll-stack-scroller {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-  transition: all 0.3s ease;
 }
 
 .scroll-stack-scroller::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-/* Smooth transitions for ScrollStack */
-.scroll-stack-scroller {
-  transition: all 0.4s ease;
-}
-
-/* When stack is completed, allow page scroll to take over */
-.scroll-stack-scroller.completed {
-  overflow-y: hidden !important;
-  pointer-events: none;
-}
-
-/* Add nice gaps between journey steps */
-.scroll-stack-card {
-  margin-bottom: 3rem !important;
-  height: auto !important;
-  min-height: 140px !important;
-}
-
-.scroll-stack-card:last-child {
-  margin-bottom: 0 !important;
-}
-
-/* Ensure consistent journey step sizing */
-.journey-step {
-  min-height: 140px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center !important;
-}
+/* Remove conflicting CSS that interferes with ScrollStack animations */
 
