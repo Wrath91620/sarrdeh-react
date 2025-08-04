@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import StarBorder from '../components/Animations/StarBorder/StarBorder.jsx';
 import BlurText from '../components/TextAnimations/BlurText/BlurText.jsx';
 import RippleGrid from '../components/Backgrounds/RippleGrid/RippleGrid.jsx';
+import CTA from '../components/CTA.jsx';
 
 export default function Services() {
   const services = [
@@ -195,29 +196,10 @@ export default function Services() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-5" style={{ background: 'linear-gradient(135deg, rgba(7, 102, 98, 0.1) 0%, rgba(87, 182, 178, 0.1) 100%)' }}>
-        <div className="container text-center">
-          <div className="row justify-content-center">
-            <div className="col-lg-8">
-              <h2 className="section-names mb-4">
-                Do you have a project in the idea stage?
-              </h2>
-              <p className="banner-par mb-5" style={{ fontSize: '1.1rem' }}>
-                Take advantage of our free consultation to develop your idea, and let our team help you draw up the plan and turn your idea into a successful real project.
-              </p>
-              <StarBorder 
-                color='#57b6b2' 
-                speed='5s'
-                href="/contact-us"
-                style={{ textDecoration: 'none' }}
-              >
-                Book Free Consultation
-              </StarBorder>
-            </div>
-          </div>
-        </div>
+      <section className="mb-5 p-0">
+        <CTA />
       </section>
+
 
       <Footer />
     </div>
